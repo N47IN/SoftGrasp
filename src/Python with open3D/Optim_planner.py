@@ -1,10 +1,44 @@
+
 import open3d as o3d
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from itertools import combinations
 from scipy.optimize import minimize
 
 
+
+class logger():
+    def __init__(self):
+      
+        self.candidates = []
+        self.err = []
+        self.handle_force = []
+        self.sec_force = []
+        self.ter_force = []
+    
+    def log(self,sol,id,err):
+        self.candidates.append([id[0],id[1],id[2]])
+        self.handle_force.append[sol.x[0]]
+        self.sec_force.append[sol.x[1]] 
+        self.ter_force.append[sol.x[2]]
+        self.err.append(err)  
+
+    def save_file(self):
+       df = pd.DataFrame({"Candidates" : np.array(self.candidates), "F1" : np.array(self.handle_force), "F2": np.array(self.sec_force), "f3": np.array(self.ter_force), "Error" :np.array(self.err)})
+       df.to_csv("diagnostics.csv", index = False)
+
+    def cost_visualizer(self):
+        k = []
+        for i in range(len(self.err)):
+            k.append(i)
+        plt.plot( k ,self.err,label=' Cost comparison')
+        plt.xlabel('Candidate Number')
+        plt.ylabel('Final cost')
+        plt.title('cost analysis')
+
+
+log1 = logger()
 class KdTree:
     def __init__(self, pcd):
         self.pcd = pcd
@@ -69,12 +103,13 @@ class Optimization:
         return unique_combinations
 
     def transformation(self):
-
+        self.id = []
         unique_combinations = self.choose()
         new_combinations = [(unique_combinations[0], unique_combinations[1], self.handle_id) for item in unique_combinations]
         
         for i in len(new_combinations):
             for j in range(3):
+                self.id.append(new_combinations[i][j]) 
                 normal = self.pcd.normals[new_combinations[i][j]]
                 point = self.pcd.points[new_combinations[i][j]]
                 # This gives us orientation of normal vector with x,y and z axis
@@ -114,7 +149,7 @@ class Optimization:
                 else:
                     self.G = np.hstack((self.G, F_oi))
             # I have to optimize the points from here
-            self.solve(combination)
+            self.solve()
 
     def objective_function(self, fc):
         return np.linalg.norm(np.dot(self.G, fc)+self.f_ext)
@@ -128,7 +163,7 @@ class Optimization:
     def constraint_6(self, fc):
         return self.mew*fc[8]-np.sqrt(fc[6]**2+fc[7]**2)
 
-    def solve(self, combination):
+    def solve(self):
         con4 = {'type': 'ineq', 'fun': self.constraint_4}
         con5 = {'type': 'ineq', 'fun': self.constraint_5}
         con6 = {'type': 'ineq', 'fun': self.constraint_6}
@@ -137,16 +172,18 @@ class Optimization:
         cons = [con4, con5, con6]
         sol = minimize(self.objective_function, self.fc,
                        method='SLSQP', bounds=bnds, constraints=cons)
+        err = self.objective_function(sol.x)
+        
+        log1.log(sol,self.id,err)
+
         if self.objective_function(sol.x) < 8:
-            print("New combination")
-            print(combination)
             print(
                 f"Normal forces to be applied at the contacts {sol.x[2]} {sol.x[5]} {sol.x[8]} and corresponding error = {self.objective_function(sol.x)}")
             print(
                 f"Friction forces in these points are {sol.x[0]} {sol.x[1]} {sol.x[3]} {sol.x[4]} {sol.x[6]} {sol.x[7]}")
         if self.objective_function(sol.x) < self.min:
             self.min = self.objective_function(sol.x)
-            self.solved_combination = combination
+            
             self.solution = sol.x
 
 
@@ -182,6 +219,7 @@ def force_visualizer(mesh, points, normals):
 
 
 def main():
+    log = logger()
     mesh_path = "cuboid.stl"
     mesh = o3d.io.read_triangle_mesh(mesh_path)
     mesh.compute_vertex_normals()
@@ -200,8 +238,7 @@ def main():
         normals.append(normal)
 
     force_visualizer(mesh, np.asarray(points), np.asarray(normals))
-    print("Final solution is")
-    print(reqd_combination)
+    log1.save_file()
 
 
 if __name__ == "__main__":
