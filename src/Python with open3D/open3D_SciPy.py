@@ -69,9 +69,9 @@ class Optimization:
                 x_axis_angle = np.arctan2(np.linalg.norm(np.cross(
                     normal, np.asarray([1, 0, 0]))), np.dot(normal, np.asarray([1, 0, 0])))
                 y_axis_angle = np.arctan2(np.linalg.norm(np.cross(
-                    normal, np.asarray([1, 0, 0]))), np.dot(normal, np.asarray([0, 1, 0])))
+                    normal, np.asarray(0, 1, 0]))), np.dot(normal, np.asarray([0, 1, 0])))
                 z_axis_angle = np.arctan2(np.linalg.norm(np.cross(
-                    normal, np.asarray([1, 0, 0]))), np.dot(normal, np.asarray([0, 0, 1])))
+                    normal, np.asarray([0, 0, 1]))), np.dot(normal, np.asarray([0, 0, 1])))
 
                 R_alpha = np.array([[np.cos(z_axis_angle), -np.sin(z_axis_angle), 0],
                                     [np.sin(z_axis_angle), np.cos(
