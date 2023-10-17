@@ -1,4 +1,3 @@
-
 import open3d as o3d
 import numpy as np
 import pandas as pd
@@ -11,22 +10,26 @@ from scipy.optimize import minimize
 class logger():
     def __init__(self):
       
-        self.candidates = []
+        self.candidate1 = []
+        self.candidate2 = []
+        self.candidate3 = []
         self.err = []
         self.handle_force = []
         self.sec_force = []
         self.ter_force = []
     
     def log(self,sol,id,err):
-        self.candidates.append([id[0],id[1],id[2]])
-        self.handle_force.append[sol.x[0]]
-        self.sec_force.append[sol.x[1]] 
-        self.ter_force.append[sol.x[2]]
+        self.candidate1.append(id[0])
+        self.candidate2.append(id[1])
+        self.candidate3.append(id[2])
+        self.handle_force.append([sol[2]])
+        self.sec_force.append([sol[5]]) 
+        self.ter_force.append([sol[8]])
         self.err.append(err)  
 
     def save_file(self):
-       df = pd.DataFrame({"Candidates" : np.array(self.candidates), "F1" : np.array(self.handle_force), "F2": np.array(self.sec_force), "f3": np.array(self.ter_force), "Error" :np.array(self.err)})
-       df.to_csv("diagnostics.csv", index = False)
+       df = pd.DataFrame({"Pt1" : self.candidate1, "Pt2" : self.candidate2,"Pt3" : self.candidate3, "F1" : self.handle_force, "F2": self.sec_force, "F3": self.ter_force, "Error" :self.err})
+       df.to_csv("realtime_diagnostics.csv", index = False)
 
     def cost_visualizer(self):
         k = []
@@ -36,9 +39,7 @@ class logger():
         plt.xlabel('Candidate Number')
         plt.ylabel('Final cost')
         plt.title('cost analysis')
-
-
-log1 = logger()
+        plt.show()
 class KdTree:
     def __init__(self, pcd):
         self.pcd = pcd
@@ -54,28 +55,15 @@ class KdTree:
         return idx
 
     def search(self):
-        handle_id = 5
+        min = 12
+        handle_id = 89
         query_point = self.pcd.points[handle_id]
         idx = self.get_points(query_point)
         idx = list(idx)
         idx.remove(handle_id)
         force_optimization = Optimization(handle_id,idx,self.pcd)
         force_optimization.transformation()
-        min_error_combination = force_optimization.solved_combination
-        min_error = force_optimization.min
-        
-        if min > min_error:
-                reqd_combination = min_error_combination
-                min = min_error
-                solution = force_optimization.solution
         # So reqd_combination will have the required points and normals
-
-        print(f"Error={min}")
-        print(
-            f"Normal forces to be applied at the contacts {solution[2]} {solution[5]} {solution[8]}")
-        print(
-            f"Friction forces in these points are {solution[0]} {solution[1]} {solution[3]} {solution[4]} {solution[6]} {solution[7]}")
-        return reqd_combination
 
 
 class Optimization:
@@ -99,19 +87,24 @@ class Optimization:
     def choose(self):
 
         unique_combinations = np.asarray(
-            list(combinations(self.idx), 2))
+            list(combinations(self.idx, 2)))
         return unique_combinations
 
     def transformation(self):
-        self.id = []
-        unique_combinations = self.choose()
-        new_combinations = [(unique_combinations[0], unique_combinations[1], self.handle_id) for item in unique_combinations]
         
-        for i in len(new_combinations):
+        unique_combinations = list(self.choose())
+        new_combinations = [[item[0], item[1], self.handle_id] for item in unique_combinations]
+         
+        for i in range(len(new_combinations)):
+            
+            self.G = None
+            self.idt = []
             for j in range(3):
-                self.id.append(new_combinations[i][j]) 
-                normal = self.pcd.normals[new_combinations[i][j]]
-                point = self.pcd.points[new_combinations[i][j]]
+                id = new_combinations[i][j]
+                self.idt.append(id)
+                 
+                normal = self.pcd.normals[id]
+                point = self.pcd.points[id]
                 # This gives us orientation of normal vector with x,y and z axis
                 normal = -normal
                 x_axis_angle = np.arctan2(np.linalg.norm(np.cross(
@@ -147,9 +140,9 @@ class Optimization:
                 if self.G is None:
                     self.G = F_oi
                 else:
-                    self.G = np.hstack((self.G, F_oi))
-            # I have to optimize the points from here
+                    self.G = np.hstack((self.G, F_oi))               
             self.solve()
+
 
     def objective_function(self, fc):
         return np.linalg.norm(np.dot(self.G, fc)+self.f_ext)
@@ -173,20 +166,9 @@ class Optimization:
         sol = minimize(self.objective_function, self.fc,
                        method='SLSQP', bounds=bnds, constraints=cons)
         err = self.objective_function(sol.x)
+        solution = list(sol.x)
+        log1.log(solution,self.idt,err)
         
-        log1.log(sol,self.id,err)
-
-        if self.objective_function(sol.x) < 8:
-            print(
-                f"Normal forces to be applied at the contacts {sol.x[2]} {sol.x[5]} {sol.x[8]} and corresponding error = {self.objective_function(sol.x)}")
-            print(
-                f"Friction forces in these points are {sol.x[0]} {sol.x[1]} {sol.x[3]} {sol.x[4]} {sol.x[6]} {sol.x[7]}")
-        if self.objective_function(sol.x) < self.min:
-            self.min = self.objective_function(sol.x)
-            
-            self.solution = sol.x
-
-
 def visualize(mesh):
 
     points = np.asarray(mesh.points)
@@ -219,7 +201,7 @@ def force_visualizer(mesh, points, normals):
 
 
 def main():
-    log = logger()
+
     mesh_path = "cuboid.stl"
     mesh = o3d.io.read_triangle_mesh(mesh_path)
     mesh.compute_vertex_normals()
@@ -230,16 +212,10 @@ def main():
 
     obj = KdTree(pcd)
     reqd_combination = obj.search()
-  
-    points = []
-    normals = []
-    for point, normal in reqd_combination:
-        points.append(point)
-        normals.append(normal)
-
-    force_visualizer(mesh, np.asarray(points), np.asarray(normals))
     log1.save_file()
+    log1.cost_visualizer()
 
+log1 = logger()
 
 if __name__ == "__main__":
     main()
