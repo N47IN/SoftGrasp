@@ -8,7 +8,7 @@ from scipy.optimize import minimize
 
 
 class logger():
-    def __init__(self):
+    def __init__(self,):
       
         self.candidate1 = []
         self.candidate2 = []
@@ -17,11 +17,16 @@ class logger():
         self.handle_force = []
         self.sec_force = []
         self.ter_force = []
-        self.temp = 1
+        self.temp = 10
+        self.min = []
     
     
 
-    def log(self,sol,id,err):
+    def log(self,sol,id,err,pcd):
+
+        ns = np.asarray([pcd.normals[id[0]],pcd.normals[id[1]],pcd.normals[id[2]]])
+        rank = np.linalg.matrix_rank(ns) 
+
         if err < self.temp:
             self.temp = err
             self.min = id
@@ -53,7 +58,7 @@ class KdTree:
     def __init__(self, pcd):
         self.pcd = pcd
         self.kd_tree = o3d.geometry.KDTreeFlann(self.pcd)
-        self.radius_sweep = 20
+        self.radius_sweep = 100
         self.selected_points = []
         self.checked_points = []   
 
@@ -88,7 +93,7 @@ class Optimization:
         self.Bci = np.matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1], [
             0, 0, 0], [0, 0, 0], [0, 0, 0]])
         self.G = None
-        self.mew = 1  # assuming it is high friction surface for testing
+        self.mew = 0.7  
         self.fc = [0, 0, 2, 0, 0, 2, 0, 0, 2]
         self.min = 15  # Taking 15 since max error will be 10
         self.solved_combination = None
@@ -154,6 +159,7 @@ class Optimization:
             self.solve()
 
 
+
     def objective_function(self, fc):
         return np.linalg.norm(np.dot(self.G, fc)+self.f_ext)
 
@@ -165,20 +171,34 @@ class Optimization:
 
     def constraint_6(self, fc):
         return self.mew*fc[8]-np.sqrt(fc[6]**2+fc[7]**2)
+    
+    #def constraint_7(self, fc):
+        #return fc[2]-4
+    
+    #def constraint_8(self, fc):
+        #return fc[5]- 4
+    
+    #def constraint_9(self, fc):
+        #return fc[8]- 4
+    
 
     def solve(self):
         con4 = {'type': 'ineq', 'fun': self.constraint_4}
         con5 = {'type': 'ineq', 'fun': self.constraint_5}
         con6 = {'type': 'ineq', 'fun': self.constraint_6}
+        #con7 = {'type': 'ineq', 'fun': self.constraint_7}
+        #con8 = {'type': 'ineq', 'fun': self.constraint_8}
+        #con9 = {'type': 'ineq', 'fun': self.constraint_9}
         b = (0, 10)
         bnds = [b, b, b, b, b, b, b, b, b]
         cons = [con4, con5, con6]
         sol = minimize(self.objective_function, self.fc,
                        method='SLSQP', bounds=bnds, constraints=cons)
         err = self.objective_function(sol.x)
+        #distance = self.centroid()
         solution = list(sol.x)
-        if self.objective_function(sol.x) < 0.2:
-         log1.log(solution,self.idt,err)
+        if self.objective_function(sol.x) < 10:
+         log1.log(solution,self.idt,err,self.pcd)
         
 def visualize(mesh):
 
@@ -193,7 +213,7 @@ def visualize(mesh):
 
 
 def mesh2PointCloud(mesh):
-    n_pts = 100
+    n_pts = 50
     pcd = mesh.sample_points_uniformly(n_pts)
     return pcd
 
@@ -233,25 +253,36 @@ def force_visualizer(mesh, points, normals,center_point):
     visualizer.run()
     visualizer.destroy_window()
 
+def visualizer(mesh):
+    visualizer = o3d.visualization.Visualizer()
+    visualizer.create_window()
+    visualizer.add_geometry(mesh)
+    visualizer.run()
+    visualizer.destroy_window()
+
 
 def main():
 
-    mesh_path = "cuboid.stl"
+    mesh_path = "mesh.stl"
     mesh = o3d.io.read_triangle_mesh(mesh_path)
     mesh.compute_vertex_normals()
     pcd = mesh2PointCloud(mesh)
+    obj = KdTree(pcd)
     center_point = np.mean(np.asarray(pcd.points), axis=0)
     pcd_df = pd.DataFrame(np.concatenate((np.asarray(pcd.points), np.asarray(pcd.normals)), axis=1),
                           columns=["x", "y", "z", "norm-x", "norm-y", "norm-z"]
                           )
 
-    obj = KdTree(pcd)
+    
     reqd_combination = obj.search()
     min = log1.save_file()
     log1.cost_visualizer()
+    print( "Optimum force at fingers is ",pcd.normals[min[0]],pcd.normals[min[1]],pcd.normals[min[2]])
     ns = np.asarray([pcd.normals[min[0]],pcd.normals[min[1]],pcd.normals[min[2]]])
+    
     pts = np.asarray([pcd.points[min[0]],pcd.points[min[1]],pcd.points[min[2]]])
     force_visualizer(mesh,pts,ns,center_point)
+    visualizer(mesh)
 
 log1 = logger()
 
