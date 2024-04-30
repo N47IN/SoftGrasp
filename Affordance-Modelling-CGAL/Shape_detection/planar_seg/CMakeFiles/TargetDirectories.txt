@@ -1,3 +1,0 @@
-/home/navin/CGAL-5.6.1/examples/Shape_detection/planar_seg/CMakeFiles/rebuild_cache.dir
-/home/navin/CGAL-5.6.1/examples/Shape_detection/planar_seg/CMakeFiles/edit_cache.dir
-/home/navin/CGAL-5.6.1/examples/Shape_detection/planar_seg/CMakeFiles/new1.dir

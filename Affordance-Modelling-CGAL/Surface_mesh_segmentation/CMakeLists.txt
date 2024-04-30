@@ -1,27 +1,45 @@
-# Created by the script cgal_create_cmake_script_with_options
+# Created by the script cgal_create_CMakeLists
 # This is the CMake script for compiling a set of CGAL applications.
 
-cmake_minimum_required(VERSION 3.1...3.23)
-project(Surface_mesh_segmentation_Examples)
+cmake_minimum_required(VERSION 3.1...3.15)
+
+project( new1 )
+
 
 # CGAL and its components
-find_package(CGAL REQUIRED)
+find_package( CGAL QUIET COMPONENTS  )
 
-create_single_source_cgal_program("sdf_values_example.cpp")
-create_single_source_cgal_program("segmentation_from_sdf_values_example.cpp")
-create_single_source_cgal_program("segmentation_via_sdf_values_example.cpp")
-create_single_source_cgal_program("segmentation_with_facet_ids_example.cpp")
-create_single_source_cgal_program("segmentation_from_sdf_values_SM_example.cpp")
-create_single_source_cgal_program("segmentation_from_sdf_values_LCC_example.cpp")
-create_single_source_cgal_program("extract_segmentation_into_mesh_example.cpp")
+if ( NOT CGAL_FOUND )
 
-find_package(OpenMesh QUIET)
-if(OpenMesh_FOUND)
-  include(UseOpenMesh)
-  message(STATUS "Found OpenMesh")
+  message(STATUS "This project requires the CGAL library, and will not be compiled.")
+  return()  
 
-  create_single_source_cgal_program("segmentation_from_sdf_values_OpenMesh_example.cpp")
-  target_link_libraries(segmentation_from_sdf_values_OpenMesh_example PRIVATE ${OPENMESH_LIBRARIES})
-else()
-  message(STATUS "NOTICE: Examples that use OpenMesh will not be compiled.")
 endif()
+
+
+# Boost and its components
+find_package( Boost REQUIRED )
+
+if ( NOT Boost_FOUND )
+
+  message(STATUS "This project requires the Boost library, and will not be compiled.")
+
+  return()  
+
+endif()
+
+# include for local directory
+
+# include for local package
+
+
+# Creating entries for target: new1
+# ############################
+
+add_executable( new1  extract_segmentation_into_mesh_example.cpp )
+
+add_to_cached_list( CGAL_EXECUTABLE_TARGETS new1 )
+
+# Link the executable to CGAL and third-party libraries
+target_link_libraries(new1 PRIVATE CGAL::CGAL )
+

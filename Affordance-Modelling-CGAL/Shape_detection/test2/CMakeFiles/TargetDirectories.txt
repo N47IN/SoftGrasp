@@ -1,3 +1,0 @@
-/home/navin/CGAL-5.6.1/examples/Shape_detection/test2/CMakeFiles/rebuild_cache.dir
-/home/navin/CGAL-5.6.1/examples/Shape_detection/test2/CMakeFiles/edit_cache.dir
-/home/navin/CGAL-5.6.1/examples/Shape_detection/test2/CMakeFiles/new1.dir

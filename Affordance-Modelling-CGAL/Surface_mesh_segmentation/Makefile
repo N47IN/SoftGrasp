@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation
+CMAKE_SOURCE_DIR = /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation
+CMAKE_BINARY_DIR = /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation/CMakeFiles /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation/CMakeFiles /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,121 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named segmentation_from_sdf_values_LCC_example
+# Target rules for targets named new1
 
 # Build rule for target.
-segmentation_from_sdf_values_LCC_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 segmentation_from_sdf_values_LCC_example
-.PHONY : segmentation_from_sdf_values_LCC_example
+new1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 new1
+.PHONY : new1
 
 # fast build rule for target.
-segmentation_from_sdf_values_LCC_example/fast:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/build
-.PHONY : segmentation_from_sdf_values_LCC_example/fast
-
-#=============================================================================
-# Target rules for targets named segmentation_with_facet_ids_example
-
-# Build rule for target.
-segmentation_with_facet_ids_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 segmentation_with_facet_ids_example
-.PHONY : segmentation_with_facet_ids_example
-
-# fast build rule for target.
-segmentation_with_facet_ids_example/fast:
-	$(MAKE) -f CMakeFiles/segmentation_with_facet_ids_example.dir/build.make CMakeFiles/segmentation_with_facet_ids_example.dir/build
-.PHONY : segmentation_with_facet_ids_example/fast
-
-#=============================================================================
-# Target rules for targets named extract_segmentation_into_mesh_example
-
-# Build rule for target.
-extract_segmentation_into_mesh_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 extract_segmentation_into_mesh_example
-.PHONY : extract_segmentation_into_mesh_example
-
-# fast build rule for target.
-extract_segmentation_into_mesh_example/fast:
-	$(MAKE) -f CMakeFiles/extract_segmentation_into_mesh_example.dir/build.make CMakeFiles/extract_segmentation_into_mesh_example.dir/build
-.PHONY : extract_segmentation_into_mesh_example/fast
-
-#=============================================================================
-# Target rules for targets named segmentation_from_sdf_values_example
-
-# Build rule for target.
-segmentation_from_sdf_values_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 segmentation_from_sdf_values_example
-.PHONY : segmentation_from_sdf_values_example
-
-# fast build rule for target.
-segmentation_from_sdf_values_example/fast:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_example.dir/build
-.PHONY : segmentation_from_sdf_values_example/fast
-
-#=============================================================================
-# Target rules for targets named cgal_check_build_system
-
-# Build rule for target.
-cgal_check_build_system: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cgal_check_build_system
-.PHONY : cgal_check_build_system
-
-# fast build rule for target.
-cgal_check_build_system/fast:
-	$(MAKE) -f CMakeFiles/cgal_check_build_system.dir/build.make CMakeFiles/cgal_check_build_system.dir/build
-.PHONY : cgal_check_build_system/fast
-
-#=============================================================================
-# Target rules for targets named segmentation_from_sdf_values_SM_example
-
-# Build rule for target.
-segmentation_from_sdf_values_SM_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 segmentation_from_sdf_values_SM_example
-.PHONY : segmentation_from_sdf_values_SM_example
-
-# fast build rule for target.
-segmentation_from_sdf_values_SM_example/fast:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_SM_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_SM_example.dir/build
-.PHONY : segmentation_from_sdf_values_SM_example/fast
-
-#=============================================================================
-# Target rules for targets named ALL_CGAL_TARGETS
-
-# Build rule for target.
-ALL_CGAL_TARGETS: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ALL_CGAL_TARGETS
-.PHONY : ALL_CGAL_TARGETS
-
-# fast build rule for target.
-ALL_CGAL_TARGETS/fast:
-	$(MAKE) -f CMakeFiles/ALL_CGAL_TARGETS.dir/build.make CMakeFiles/ALL_CGAL_TARGETS.dir/build
-.PHONY : ALL_CGAL_TARGETS/fast
-
-#=============================================================================
-# Target rules for targets named segmentation_via_sdf_values_example
-
-# Build rule for target.
-segmentation_via_sdf_values_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 segmentation_via_sdf_values_example
-.PHONY : segmentation_via_sdf_values_example
-
-# fast build rule for target.
-segmentation_via_sdf_values_example/fast:
-	$(MAKE) -f CMakeFiles/segmentation_via_sdf_values_example.dir/build.make CMakeFiles/segmentation_via_sdf_values_example.dir/build
-.PHONY : segmentation_via_sdf_values_example/fast
-
-#=============================================================================
-# Target rules for targets named sdf_values_example
-
-# Build rule for target.
-sdf_values_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sdf_values_example
-.PHONY : sdf_values_example
-
-# fast build rule for target.
-sdf_values_example/fast:
-	$(MAKE) -f CMakeFiles/sdf_values_example.dir/build.make CMakeFiles/sdf_values_example.dir/build
-.PHONY : sdf_values_example/fast
+new1/fast:
+	$(MAKE) -f CMakeFiles/new1.dir/build.make CMakeFiles/new1.dir/build
+.PHONY : new1/fast
 
 extract_segmentation_into_mesh_example.o: extract_segmentation_into_mesh_example.cpp.o
 
@@ -233,7 +129,7 @@ extract_segmentation_into_mesh_example.o: extract_segmentation_into_mesh_example
 
 # target to build an object file
 extract_segmentation_into_mesh_example.cpp.o:
-	$(MAKE) -f CMakeFiles/extract_segmentation_into_mesh_example.dir/build.make CMakeFiles/extract_segmentation_into_mesh_example.dir/extract_segmentation_into_mesh_example.cpp.o
+	$(MAKE) -f CMakeFiles/new1.dir/build.make CMakeFiles/new1.dir/extract_segmentation_into_mesh_example.cpp.o
 .PHONY : extract_segmentation_into_mesh_example.cpp.o
 
 extract_segmentation_into_mesh_example.i: extract_segmentation_into_mesh_example.cpp.i
@@ -242,7 +138,7 @@ extract_segmentation_into_mesh_example.i: extract_segmentation_into_mesh_example
 
 # target to preprocess a source file
 extract_segmentation_into_mesh_example.cpp.i:
-	$(MAKE) -f CMakeFiles/extract_segmentation_into_mesh_example.dir/build.make CMakeFiles/extract_segmentation_into_mesh_example.dir/extract_segmentation_into_mesh_example.cpp.i
+	$(MAKE) -f CMakeFiles/new1.dir/build.make CMakeFiles/new1.dir/extract_segmentation_into_mesh_example.cpp.i
 .PHONY : extract_segmentation_into_mesh_example.cpp.i
 
 extract_segmentation_into_mesh_example.s: extract_segmentation_into_mesh_example.cpp.s
@@ -251,170 +147,8 @@ extract_segmentation_into_mesh_example.s: extract_segmentation_into_mesh_example
 
 # target to generate assembly for a file
 extract_segmentation_into_mesh_example.cpp.s:
-	$(MAKE) -f CMakeFiles/extract_segmentation_into_mesh_example.dir/build.make CMakeFiles/extract_segmentation_into_mesh_example.dir/extract_segmentation_into_mesh_example.cpp.s
+	$(MAKE) -f CMakeFiles/new1.dir/build.make CMakeFiles/new1.dir/extract_segmentation_into_mesh_example.cpp.s
 .PHONY : extract_segmentation_into_mesh_example.cpp.s
-
-sdf_values_example.o: sdf_values_example.cpp.o
-
-.PHONY : sdf_values_example.o
-
-# target to build an object file
-sdf_values_example.cpp.o:
-	$(MAKE) -f CMakeFiles/sdf_values_example.dir/build.make CMakeFiles/sdf_values_example.dir/sdf_values_example.cpp.o
-.PHONY : sdf_values_example.cpp.o
-
-sdf_values_example.i: sdf_values_example.cpp.i
-
-.PHONY : sdf_values_example.i
-
-# target to preprocess a source file
-sdf_values_example.cpp.i:
-	$(MAKE) -f CMakeFiles/sdf_values_example.dir/build.make CMakeFiles/sdf_values_example.dir/sdf_values_example.cpp.i
-.PHONY : sdf_values_example.cpp.i
-
-sdf_values_example.s: sdf_values_example.cpp.s
-
-.PHONY : sdf_values_example.s
-
-# target to generate assembly for a file
-sdf_values_example.cpp.s:
-	$(MAKE) -f CMakeFiles/sdf_values_example.dir/build.make CMakeFiles/sdf_values_example.dir/sdf_values_example.cpp.s
-.PHONY : sdf_values_example.cpp.s
-
-segmentation_from_sdf_values_LCC_example.o: segmentation_from_sdf_values_LCC_example.cpp.o
-
-.PHONY : segmentation_from_sdf_values_LCC_example.o
-
-# target to build an object file
-segmentation_from_sdf_values_LCC_example.cpp.o:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/segmentation_from_sdf_values_LCC_example.cpp.o
-.PHONY : segmentation_from_sdf_values_LCC_example.cpp.o
-
-segmentation_from_sdf_values_LCC_example.i: segmentation_from_sdf_values_LCC_example.cpp.i
-
-.PHONY : segmentation_from_sdf_values_LCC_example.i
-
-# target to preprocess a source file
-segmentation_from_sdf_values_LCC_example.cpp.i:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/segmentation_from_sdf_values_LCC_example.cpp.i
-.PHONY : segmentation_from_sdf_values_LCC_example.cpp.i
-
-segmentation_from_sdf_values_LCC_example.s: segmentation_from_sdf_values_LCC_example.cpp.s
-
-.PHONY : segmentation_from_sdf_values_LCC_example.s
-
-# target to generate assembly for a file
-segmentation_from_sdf_values_LCC_example.cpp.s:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_LCC_example.dir/segmentation_from_sdf_values_LCC_example.cpp.s
-.PHONY : segmentation_from_sdf_values_LCC_example.cpp.s
-
-segmentation_from_sdf_values_SM_example.o: segmentation_from_sdf_values_SM_example.cpp.o
-
-.PHONY : segmentation_from_sdf_values_SM_example.o
-
-# target to build an object file
-segmentation_from_sdf_values_SM_example.cpp.o:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_SM_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_SM_example.dir/segmentation_from_sdf_values_SM_example.cpp.o
-.PHONY : segmentation_from_sdf_values_SM_example.cpp.o
-
-segmentation_from_sdf_values_SM_example.i: segmentation_from_sdf_values_SM_example.cpp.i
-
-.PHONY : segmentation_from_sdf_values_SM_example.i
-
-# target to preprocess a source file
-segmentation_from_sdf_values_SM_example.cpp.i:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_SM_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_SM_example.dir/segmentation_from_sdf_values_SM_example.cpp.i
-.PHONY : segmentation_from_sdf_values_SM_example.cpp.i
-
-segmentation_from_sdf_values_SM_example.s: segmentation_from_sdf_values_SM_example.cpp.s
-
-.PHONY : segmentation_from_sdf_values_SM_example.s
-
-# target to generate assembly for a file
-segmentation_from_sdf_values_SM_example.cpp.s:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_SM_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_SM_example.dir/segmentation_from_sdf_values_SM_example.cpp.s
-.PHONY : segmentation_from_sdf_values_SM_example.cpp.s
-
-segmentation_from_sdf_values_example.o: segmentation_from_sdf_values_example.cpp.o
-
-.PHONY : segmentation_from_sdf_values_example.o
-
-# target to build an object file
-segmentation_from_sdf_values_example.cpp.o:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_example.dir/segmentation_from_sdf_values_example.cpp.o
-.PHONY : segmentation_from_sdf_values_example.cpp.o
-
-segmentation_from_sdf_values_example.i: segmentation_from_sdf_values_example.cpp.i
-
-.PHONY : segmentation_from_sdf_values_example.i
-
-# target to preprocess a source file
-segmentation_from_sdf_values_example.cpp.i:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_example.dir/segmentation_from_sdf_values_example.cpp.i
-.PHONY : segmentation_from_sdf_values_example.cpp.i
-
-segmentation_from_sdf_values_example.s: segmentation_from_sdf_values_example.cpp.s
-
-.PHONY : segmentation_from_sdf_values_example.s
-
-# target to generate assembly for a file
-segmentation_from_sdf_values_example.cpp.s:
-	$(MAKE) -f CMakeFiles/segmentation_from_sdf_values_example.dir/build.make CMakeFiles/segmentation_from_sdf_values_example.dir/segmentation_from_sdf_values_example.cpp.s
-.PHONY : segmentation_from_sdf_values_example.cpp.s
-
-segmentation_via_sdf_values_example.o: segmentation_via_sdf_values_example.cpp.o
-
-.PHONY : segmentation_via_sdf_values_example.o
-
-# target to build an object file
-segmentation_via_sdf_values_example.cpp.o:
-	$(MAKE) -f CMakeFiles/segmentation_via_sdf_values_example.dir/build.make CMakeFiles/segmentation_via_sdf_values_example.dir/segmentation_via_sdf_values_example.cpp.o
-.PHONY : segmentation_via_sdf_values_example.cpp.o
-
-segmentation_via_sdf_values_example.i: segmentation_via_sdf_values_example.cpp.i
-
-.PHONY : segmentation_via_sdf_values_example.i
-
-# target to preprocess a source file
-segmentation_via_sdf_values_example.cpp.i:
-	$(MAKE) -f CMakeFiles/segmentation_via_sdf_values_example.dir/build.make CMakeFiles/segmentation_via_sdf_values_example.dir/segmentation_via_sdf_values_example.cpp.i
-.PHONY : segmentation_via_sdf_values_example.cpp.i
-
-segmentation_via_sdf_values_example.s: segmentation_via_sdf_values_example.cpp.s
-
-.PHONY : segmentation_via_sdf_values_example.s
-
-# target to generate assembly for a file
-segmentation_via_sdf_values_example.cpp.s:
-	$(MAKE) -f CMakeFiles/segmentation_via_sdf_values_example.dir/build.make CMakeFiles/segmentation_via_sdf_values_example.dir/segmentation_via_sdf_values_example.cpp.s
-.PHONY : segmentation_via_sdf_values_example.cpp.s
-
-segmentation_with_facet_ids_example.o: segmentation_with_facet_ids_example.cpp.o
-
-.PHONY : segmentation_with_facet_ids_example.o
-
-# target to build an object file
-segmentation_with_facet_ids_example.cpp.o:
-	$(MAKE) -f CMakeFiles/segmentation_with_facet_ids_example.dir/build.make CMakeFiles/segmentation_with_facet_ids_example.dir/segmentation_with_facet_ids_example.cpp.o
-.PHONY : segmentation_with_facet_ids_example.cpp.o
-
-segmentation_with_facet_ids_example.i: segmentation_with_facet_ids_example.cpp.i
-
-.PHONY : segmentation_with_facet_ids_example.i
-
-# target to preprocess a source file
-segmentation_with_facet_ids_example.cpp.i:
-	$(MAKE) -f CMakeFiles/segmentation_with_facet_ids_example.dir/build.make CMakeFiles/segmentation_with_facet_ids_example.dir/segmentation_with_facet_ids_example.cpp.i
-.PHONY : segmentation_with_facet_ids_example.cpp.i
-
-segmentation_with_facet_ids_example.s: segmentation_with_facet_ids_example.cpp.s
-
-.PHONY : segmentation_with_facet_ids_example.s
-
-# target to generate assembly for a file
-segmentation_with_facet_ids_example.cpp.s:
-	$(MAKE) -f CMakeFiles/segmentation_with_facet_ids_example.dir/build.make CMakeFiles/segmentation_with_facet_ids_example.dir/segmentation_with_facet_ids_example.cpp.s
-.PHONY : segmentation_with_facet_ids_example.cpp.s
 
 # Help Target
 help:
@@ -422,38 +156,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... segmentation_from_sdf_values_LCC_example"
-	@echo "... segmentation_with_facet_ids_example"
-	@echo "... extract_segmentation_into_mesh_example"
-	@echo "... segmentation_from_sdf_values_example"
 	@echo "... rebuild_cache"
-	@echo "... cgal_check_build_system"
-	@echo "... segmentation_from_sdf_values_SM_example"
-	@echo "... ALL_CGAL_TARGETS"
 	@echo "... edit_cache"
-	@echo "... segmentation_via_sdf_values_example"
-	@echo "... sdf_values_example"
+	@echo "... new1"
 	@echo "... extract_segmentation_into_mesh_example.o"
 	@echo "... extract_segmentation_into_mesh_example.i"
 	@echo "... extract_segmentation_into_mesh_example.s"
-	@echo "... sdf_values_example.o"
-	@echo "... sdf_values_example.i"
-	@echo "... sdf_values_example.s"
-	@echo "... segmentation_from_sdf_values_LCC_example.o"
-	@echo "... segmentation_from_sdf_values_LCC_example.i"
-	@echo "... segmentation_from_sdf_values_LCC_example.s"
-	@echo "... segmentation_from_sdf_values_SM_example.o"
-	@echo "... segmentation_from_sdf_values_SM_example.i"
-	@echo "... segmentation_from_sdf_values_SM_example.s"
-	@echo "... segmentation_from_sdf_values_example.o"
-	@echo "... segmentation_from_sdf_values_example.i"
-	@echo "... segmentation_from_sdf_values_example.s"
-	@echo "... segmentation_via_sdf_values_example.o"
-	@echo "... segmentation_via_sdf_values_example.i"
-	@echo "... segmentation_via_sdf_values_example.s"
-	@echo "... segmentation_with_facet_ids_example.o"
-	@echo "... segmentation_with_facet_ids_example.i"
-	@echo "... segmentation_with_facet_ids_example.s"
 .PHONY : help
 
 

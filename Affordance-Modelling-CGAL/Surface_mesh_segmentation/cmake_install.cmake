@@ -1,4 +1,4 @@
-# Install script for directory: /home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation
+# Install script for directory: /home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/navin/CGAL-5.6.1/examples/Surface_mesh_segmentation/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/navin/SoftGrasp/Affordance-Modelling-CGAL/Surface_mesh_segmentation/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
