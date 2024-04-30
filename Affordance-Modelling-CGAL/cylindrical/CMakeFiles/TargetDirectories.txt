@@ -1,0 +1,3 @@
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/cylindrical/CMakeFiles/rebuild_cache.dir
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/cylindrical/CMakeFiles/edit_cache.dir
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/cylindrical/CMakeFiles/new1.dir

@@ -1,0 +1,3 @@
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/planar_seg/CMakeFiles/rebuild_cache.dir
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/planar_seg/CMakeFiles/edit_cache.dir
+/home/navin/SoftGrasp/Affordance-Modelling-CGAL/planar_seg/CMakeFiles/new1.dir
